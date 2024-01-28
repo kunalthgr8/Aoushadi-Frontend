@@ -94,6 +94,18 @@
   align-items: center;
 }
 
-.Image-Box img {
-  width: 180px;
+@media only screen and (max-width: 761px) {
+  .Adv-Box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 2px;
+    margin: 2px;
+  }
+  .Content-Box {
+    width: 80%;
+  }
+  .Image-Box img {
+    width: 220px;
+  }
 }
