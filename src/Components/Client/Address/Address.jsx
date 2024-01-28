@@ -28,10 +28,6 @@ export default function Address() {
           ></input>
         </div>
       </div>
-      <div className="button-below">
-        <button>Back</button>
-        <button>Proceed</button>
-      </div>
     </div>
   );
 }

@@ -10,46 +10,37 @@
 .cover {
   margin-right: 200px;
   margin-top: 40px;
-  height: 100vh;
-  font-family: "Poppins";
 }
 .note {
   background-color: white;
-  border-radius: 10px;
-  text-align: center;
-  border: 2px solid var(--main-bg-color);
+  border-radius: 20px;
+  border: 1px solid var(--main-bg-color);
   color: var(--main-bg-color);
-  padding: 15px 40px;
-  font-size: 18px;
+  padding: 10px 40px;
+  font-size: larger;
   font-weight: 600;
-  margin: 10px;
-  margin-bottom: 20px;
 }
 .locate {
   background-color: var(--main-bg-color);
-  padding: 10px 50px;
-  border-radius: 15px;
+  padding: 10px 40px;
+  border-radius: 10px;
   color: white;
-  font-size: 18px;
-  margin: 10px;
-  font-weight: 600;
+  font-size: larger;
+  font-weight: 700;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
 }
 .or {
-  margin: 10px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
-  font-size: 18px;
+  font-size: x-large;
   font-weight: 600;
-  color: #646060;
-}
-.block input {
-  font-size: 16px;
+  color: var(--main-bg-color);
 }
 label {
   color: var(--main-bg-color);
-  font-size: 16px;
+  font-size: larger;
   font-weight: 600;
 }
 .text {
@@ -64,12 +55,18 @@ label {
 .text:focus {
   border: none;
 }
-.button-below {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px;
-}
-.button-below button {
-  font-size: 16px;
+@media screen and (max-width: 786px) {
+  .cover {
+    margin-right: 0px;
+    padding: 0px 15px;
+  }
+  .note {
+    font-size: large;
+    padding: 10px 20px;
+  }
+  label,
+  .text {
+    display: flex;
+    justify-content: center;
+  }
 }
