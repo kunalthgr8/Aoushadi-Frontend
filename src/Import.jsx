@@ -17,7 +17,7 @@ import SearchBar from "./Components/Client/SearchBar/SearchBar";
 import TopBar from "./Components/Client/TopBar/TopBar";
 import User from "./Components/Client/User/User";
 import SideBar from "./Components/Common/SideBar/SideBar";
-
+import Gallery from "./Components/Client/ProductPage/Gallery.js";
 export {
   Login,
   TopBar,
@@ -38,4 +38,5 @@ export {
   Medicine,
   Address,
   CartCard,
+  Gallery,
 };
