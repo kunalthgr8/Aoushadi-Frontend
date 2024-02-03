@@ -18,8 +18,8 @@ import {
 } from "./Import.jsx";
 
 function App() {
-  const [logined, setLogined] = useState(true);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [logined, setLogined] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth); 
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -34,7 +34,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-  }, []);
+    console.log(logined); 
+  }, [logined]);
+
+  const handleLoginSuccess = (e) => {
+    console.log('Login successful!'); // Add this line
+    setLogined(true);
+  };
 
   return (
     <Router>
@@ -64,11 +70,12 @@ function App() {
           </>
         ) : (
           <Routes>
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+
             <Route path="home" element={<User />} />
 
             {/* Add a default route for unmatched paths */}
-            <Route path="*" element={<Login />} />
+            <Route path="*" element={<Login  onLoginSuccess={handleLoginSuccess}/>} />
           </Routes>
         )}
       </div>

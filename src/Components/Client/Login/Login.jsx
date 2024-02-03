@@ -1,14 +1,70 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../../Assets/Logo.svg";
 import "./Login.css";
-const Login = () => {
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
+const Login = ({ onLoginSuccess }) => {
   const [formState, setFormState] = useState("signIn");
   const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const loginUser = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:4000/login", data);
+      return response.data;
+    } catch (err) {
+      console.error('Login Error:', err);
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      let data;
+      let response;
+      if (formState === "signIn") {
+        data = {
+          userId: userId,
+          password: password
+        };
+        const response = await loginUser(data);
+        if (response.status) {
+          console.log('login success');
+          onLoginSuccess();
+          return;
+        }
+      } else {
+        data = {
+          userId: userId,
+          email: email,
+          mobile: mobileNumber,
+          password: password
+        };
+        response = await axios.post("http://localhost:4000/register", data);
+        console.log(response);
+        console.log(response.statusText, response.data.status);
+        if (response.data.status) {
+          data = {
+            userId: userId,
+            password: password
+          };
+          const response = await loginUser(data);
+          if (response.status) {
+            console.log('login success');
+            onLoginSuccess();
+            return;
+          }
+        }
+      }
+
+    } catch (err) {
+
+    }
     // Add your form submission logic here
     // You can access form values using userId, email, mobileNumber, and password states
   };
@@ -23,7 +79,7 @@ const Login = () => {
         </div>
       </div>
       <div className="Form-Login">
-      <form className="Input-Login" onSubmit={handleSubmit}>
+        <form className="Input-Login" onSubmit={handleSubmit}>
           {formState === "signIn" && (
             <input
               type="text"
@@ -36,17 +92,7 @@ const Login = () => {
             <>
               <input
                 type="number"
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
+                Expand Down
                 placeholder="User ID"
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
@@ -75,7 +121,7 @@ const Login = () => {
             Submit
           </button>
         </form>
-        
+
         <div className="Para-Login">
           <p onClick={() => setFormState(formState === "signIn" ? "signUp" : "signIn")}>
             {formState === "signIn" ? "Create New Account?" : "Already have an account?"}
